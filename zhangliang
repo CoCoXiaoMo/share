@@ -76,3 +76,34 @@ t = ops.ones(5, mindspore.float32)
 print(f"t: {t}")
 n = t.asnumpy()
 print(f"n: {n}")
+
+n = np.ones(5)
+t = Tensor.from_numpy(n)
+np.add(n, 1, out=n)
+print(f"t: {t}")
+print(f"n: {n}")
+
+indptr = Tensor([0, 1, 2])
+indices = Tensor([0, 1])
+values = Tensor([1, 2], dtype=mindspore.float32)
+shape = (2, 4)
+
+# Make a CSRTensor
+csr_tensor = CSRTensor(indptr, indices, values, shape)
+
+print(csr_tensor.astype(mindspore.float64).dtype)
+
+
+indices = Tensor([[0, 1], [1, 2]], dtype=mindspore.int32)
+values = Tensor([1, 2], dtype=mindspore.float32)
+shape = (3, 4)
+
+# Make a COOTensor
+coo_tensor = COOTensor(indices, values, shape)
+
+print(coo_tensor.values)
+print(coo_tensor.indices)
+print(coo_tensor.shape)
+print(coo_tensor.astype(mindspore.float64).dtype)  # COOTensor to float64
+
+
